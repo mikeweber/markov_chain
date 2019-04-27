@@ -1,6 +1,9 @@
-require_relative '../lib/word'
+require 'spec_helper'
+require 'markov_chain'
+include MarkovChain
 
-describe Word do
+describe MarkovChain::Word do
+
   it 'strips away any non-alphabetic characters' do
     expect(Word.init('Foo.').to_s).to eq('Foo')
     expect(Word.init('.Foo.').to_s).to eq('Foo')

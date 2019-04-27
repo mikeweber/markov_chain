@@ -1,11 +1,12 @@
-require_relative '../lib/markov_chain'
+require 'markov_chain'
+include MarkovChain
 
-describe MarkovChain do
+describe MarkovChain::Chain do
   it 'takes in a word list' do
     list = WordList.new
     list.add('I am what I am')
 
-    markov = MarkovChain.new(list)
+    markov = Chain.new(list)
     expect(markov.odds_for('I', 'am')).to eq(1)
     expect(markov.odds_for('am', 'what')).to eq(0.5)
     expect(markov.odds_for('am')).to eq(0.5)
@@ -16,7 +17,7 @@ describe MarkovChain do
     list = WordList.new
     list.add('I am what I am')
 
-    markov = MarkovChain.new(list)
+    markov = Chain.new(list)
     start = markov.pick_start_word(['foo'])
     expect(start).to be_nil
   end
@@ -25,7 +26,7 @@ describe MarkovChain do
     list = WordList.new
     list.add('I am what I am')
 
-    markov = MarkovChain.new(list)
+    markov = Chain.new(list)
     expect(markov.build('I')).to be_a(String)
   end
 
@@ -33,7 +34,7 @@ describe MarkovChain do
     list = WordList.new
     list.add('I am what I am')
 
-    markov = MarkovChain.new(list)
+    markov = Chain.new(list)
     expect(markov.generate(['I', 'am'])).to be_a(String)
   end
 end

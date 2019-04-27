@@ -1,6 +1,7 @@
-require_relative '../lib/word_list'
+require 'markov_chain'
+include MarkovChain
 
-describe WordList do
+describe MarkovChain::WordList do
   it 'tracks the frequency of word pairs' do
     list = WordList.new
     expect {
