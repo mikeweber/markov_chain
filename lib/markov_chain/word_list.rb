@@ -17,7 +17,8 @@ module MarkovChain
 
     def add(sentence)
       length, words = break_it_down(sentence)
-      start_words << words[0] unless start_words.include?(words[0])
+      add_start_word(words[0])
+
       words.each.with_index do |word, index|
         next if index >= length
 
@@ -25,8 +26,12 @@ module MarkovChain
       end
     end
 
-    def add_pair(head, tail)
-      self[head].add_tail(tail)
+    def add_pair(head, tail, increment = 1)
+      self[head].add_tail(tail, increment)
+    end
+
+    def add_start_word(word)
+      start_words << word unless start_words.include?(word)
     end
 
     def [](word)

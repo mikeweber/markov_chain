@@ -11,9 +11,9 @@ module MarkovChain
       @tails = Hash.new { |h, k| h[k] = 0 }
     end
 
-    def add_tail(other)
+    def add_tail(other, increment = 1)
       @tail_count = nil
-      tails[Word.init(other)] += 1
+      tails[Word.init(other)] += increment
     end
 
     def pick_next_word(num = rand)
@@ -68,6 +68,10 @@ module MarkovChain
 
     def scores
       []
+    end
+
+    def tails
+      {}
     end
 
     def pick_next_word(*args)

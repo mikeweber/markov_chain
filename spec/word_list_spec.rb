@@ -9,14 +9,23 @@ describe MarkovChain::WordList do
     }.to change { list.frequency_of('foo', 'bar') }.from(0).to(1)
   end
 
-  it 'matches words regardless of case' do
+  it 'matches words based on case' do
     list = WordList.new
     expect {
       list.add_pair('foo', 'bar')
       list.add_pair('foo', 'baz')
       list.add_pair('foo', 'bar')
+      list.add_pair('fOO', 'bar')
     }.to change { list.frequency_of('foo', 'bar') }.from(0).to(2)
       .and change { list.frequency_of('foo', 'baz') }.from(0).to(1)
+      .and change { list.frequency_of('fOO', 'bar') }.from(0).to(1)
+  end
+
+  it 'can add a pair multiple times' do
+    list = WordList.new
+    expect {
+      list.add_pair('foo', 'bar', 5)
+    }.to change { list.frequency_of('foo', 'bar') }.from(0).to(5)
   end
 
   it 'breaks down a sentence into standardized words' do
