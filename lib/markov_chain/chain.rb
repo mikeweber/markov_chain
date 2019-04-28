@@ -23,7 +23,7 @@ module MarkovChain
       while next_word = words[next_word].pick_next_word.word
         sentence << next_word
       end
-      sentence.join(' ') + '.'
+      sentence.join(' ')
     end
 
     def pick_start_word(starting_words, num = rand)
