@@ -7,7 +7,7 @@ module MarkovChain
     end
 
     def initialize(word)
-      @word = word.gsub(/[^a-zA-Z]/, '')
+      @word = word
       @tails = Hash.new { |h, k| h[k] = 0 }
     end
 
@@ -41,28 +41,20 @@ module MarkovChain
       @tail_count ||= tails.values.inject(:+)
     end
 
-    def blank?
-      word.empty?
-    end
-
-    def to_s
-      word
-    end
-
     def eql?(other)
       other.is_a?(self.class) && self == other
     end
 
     def ==(other)
-      downcase == other.downcase
+      to_s == other.to_s
     end
 
     def hash
-      downcase.hash
+      to_s.hash
     end
 
-    def downcase
-      word.downcase
+    def to_s
+      word
     end
 
     def inspect
@@ -82,10 +74,6 @@ module MarkovChain
     end
 
     def to_s
-      ''
-    end
-
-    def downcase
       ''
     end
 
