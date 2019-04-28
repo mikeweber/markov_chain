@@ -32,7 +32,7 @@ list = WordList.new
 list.add('I am what I am')
 list.add('Where am I?')
 list.add('I am dazed and confused')
-MarkovChain.new(list).generate # => 
+MarkovChain.new(list).generate # => "Where am what I am dazed and confused"
 ```
 
 ## License
