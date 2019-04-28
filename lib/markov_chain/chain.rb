@@ -13,7 +13,7 @@ module MarkovChain
       words[head].score(tail)
     end
 
-    def generate(starting_words)
+    def generate(starting_words = words.start_words)
       build(pick_start_word(starting_words))
     end
 
@@ -32,6 +32,10 @@ module MarkovChain
         head.add_tail(word)
       end
       head.pick_next_word(num)
+    end
+
+    def inspect
+      %{#<#{self.class.name}:#{self.object_id}>}
     end
   end
 end

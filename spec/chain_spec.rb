@@ -37,5 +37,13 @@ describe MarkovChain::Chain do
     markov = Chain.new(list)
     expect(markov.generate(['I', 'am'])).to be_a(String)
   end
+
+  it 'can build sentences from a word list' do
+    list = WordList.new
+    list.add('I am what I am')
+
+    markov = Chain.new(list)
+    expect(markov.generate).to be_a(String)
+  end
 end
 

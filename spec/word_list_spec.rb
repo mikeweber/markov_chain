@@ -26,7 +26,7 @@ describe MarkovChain::WordList do
     expect(list.frequency_of('am', 'what')).to eq(1)
     expect(list.frequency_of('what', 'i')).to eq(1)
     expect(list.frequency_of('am', Terminator.new)).to eq(1)
-    expect(list.start_words[Word.new('i')]).to eq(1)
+    expect(list.start_words).to include('I')
 
     list.add('I am so dazed and confused')
     expect(list.frequency_of('i', 'am')).to eq(3)
@@ -38,7 +38,7 @@ describe MarkovChain::WordList do
     expect(list.frequency_of('dazed', 'and')).to eq(1)
     expect(list.frequency_of('and', 'confused')).to eq(1)
     expect(list.frequency_of('confused', Terminator.new)).to eq(1)
-    expect(list.start_words[Word.new('i')]).to eq(2)
+    expect(list.start_words).to include('I')
 
     list.add('Dazed and confused, I am.')
     expect(list.frequency_of('i', 'am')).to eq(4)
@@ -51,7 +51,7 @@ describe MarkovChain::WordList do
     expect(list.frequency_of('and', 'confused')).to eq(2)
     expect(list.frequency_of('confused', Terminator.new)).to eq(1)
     expect(list.frequency_of('confused', 'I')).to eq(1)
-    expect(list.start_words[Word.new('i')]).to eq(2)
-    expect(list.start_words[Word.new('dazed')]).to eq(1)
+    expect(list.start_words).to include('I')
+    expect(list.start_words).to include('dazed')
   end
 end

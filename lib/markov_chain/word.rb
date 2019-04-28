@@ -64,6 +64,10 @@ module MarkovChain
     def downcase
       word.downcase
     end
+
+    def inspect
+      %{#<#{self.class.name}:#{self.object_id} "#{word}">}
+    end
   end
 
   class Terminator < Word
@@ -83,6 +87,10 @@ module MarkovChain
 
     def downcase
       ''
+    end
+
+    def inspect
+      %{#<#{self.class.name}:#{self.object_id}>}
     end
   end
 end

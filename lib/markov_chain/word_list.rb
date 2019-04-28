@@ -8,7 +8,7 @@ module MarkovChain
       @frequencies = Hash.new do |head_hash, head|
         head_hash[head] = Word.init(head)
       end
-      @start_words = Hash.new { |h, k| h[k] = 0 }
+      @start_words = []
     end
 
     def frequency_of(head, tail)
@@ -17,7 +17,7 @@ module MarkovChain
 
     def add(sentence)
       length, words = break_it_down(sentence)
-      start_words[words[0]] += 1
+      start_words << words[0] unless start_words.include?(words[0])
       words.each.with_index do |word, index|
         next if index >= length
 
@@ -39,6 +39,10 @@ module MarkovChain
 
     def non_terminating_words
       frequencies.keys
+    end
+
+    def inspect
+      %{#<#{self.class.name}:#{self.object_id} num_words=#{frequencies.size}>}
     end
 
     private
